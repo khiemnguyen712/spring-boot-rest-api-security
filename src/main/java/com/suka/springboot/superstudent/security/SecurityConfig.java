@@ -6,36 +6,18 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-        UserDetails peppa = User.builder()
-                .username("peppa")
-                .password("{noop}peppa123")
-                .roles("STUDENT")
-                .build();
-
-        UserDetails mommy = User.builder()
-                .username("mommy")
-                .password("{noop}mommy123")
-                .roles("STUDENT", "TEACHER")
-                .build();
-
-        UserDetails daddy = User.builder()
-                .username("daddy")
-                .password("{noop}daddy123")
-                .roles("STUDENT", "TEACHER", "PRINCIPLE")
-                .build();
-
-        return new InMemoryUserDetailsManager(peppa, mommy, daddy);
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
