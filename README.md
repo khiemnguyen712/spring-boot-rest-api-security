@@ -1,7 +1,6 @@
-# Student Management RESTful API (with Authentication and Role-Based Access)
+# Student Management RESTful API Security
 
-Built using **Spring Boot** with **Spring Security**, providing secure **Create, Read, Update, Delete (CRUD)** functionalities.  
-Authentication and authorization are handled using **Spring Security** with **user credentials and roles stored in a MySQL Database**. Bcrypt for password Encryption.
+implementing **Spring Security**, providing authentication and authorization. 
 
 ---
 
@@ -35,8 +34,8 @@ src/main/resources
 
 ## API Endpoints
 
-| HTTP Method | Endpoint               | Description                     | Access  |
-|-------------|------------------------|---------------------------------|---------|
+| HTTP Method | Endpoint                | Description                     | Access  |
+|-------------|--------------------- ---|---------------------------------|---------|
 | GET         | `/api/students`         | Get all students                | USER, ADMIN |
 | GET         | `/api/students/{id}`    | Get a student by ID             | USER, ADMIN |
 | POST        | `/api/students`         | Create a new student            | ADMIN |
